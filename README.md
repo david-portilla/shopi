@@ -1,2 +1,3 @@
-# shopi
-E-commerce using react, Vite.js &amp; TailwindCSS
+# Shopi
+
+E-commerce using react, Vite.js & TailwindCSS
