@@ -4,6 +4,7 @@ import MyAccount from "../Pages/MyAccount";
 import MyOrder from "../Pages/MyOrder";
 import MyOrders from "../Pages/MyOrders";
 import NotFound from "../Pages/NotFound";
+import Navbar from "../Components/Navbar";
 import "./App.css";
 
 const AppRoutes = () => {
@@ -13,12 +14,12 @@ const AppRoutes = () => {
       element: <Home />,
     },
     {
-      path: "/my-account",
-      element: <MyAccount />,
-    },
-    {
       path: "/my-order",
       element: <MyOrder />,
+    },
+    {
+      path: "/my-account",
+      element: <MyAccount />,
     },
     {
       path: "/my-orders",
@@ -37,6 +38,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <AppRoutes />
+      <Navbar />
     </BrowserRouter>
   );
 };
