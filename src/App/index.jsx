@@ -1,4 +1,5 @@
 import { BrowserRouter, useRoutes } from "react-router-dom";
+import { ShoppingCartProvider } from "../Context";
 import Home from "../Pages/Home";
 import MyAccount from "../Pages/MyAccount";
 import MyOrder from "../Pages/MyOrder";
@@ -8,39 +9,41 @@ import Navbar from "../Components/Navbar";
 import "./App.css";
 
 const AppRoutes = () => {
-  let routes = useRoutes([
-    {
-      path: "/",
-      element: <Home />,
-    },
-    {
-      path: "/my-order",
-      element: <MyOrder />,
-    },
-    {
-      path: "/my-account",
-      element: <MyAccount />,
-    },
-    {
-      path: "/my-orders",
-      element: <MyOrders />,
-    },
-    {
-      path: "/*",
-      element: <NotFound />,
-    },
-  ]);
+	let routes = useRoutes([
+		{
+			path: "/",
+			element: <Home />,
+		},
+		{
+			path: "/my-order",
+			element: <MyOrder />,
+		},
+		{
+			path: "/my-account",
+			element: <MyAccount />,
+		},
+		{
+			path: "/my-orders",
+			element: <MyOrders />,
+		},
+		{
+			path: "/*",
+			element: <NotFound />,
+		},
+	]);
 
-  return routes;
+	return routes;
 };
 
 const App = () => {
-  return (
-    <BrowserRouter>
-      <AppRoutes />
-      <Navbar />
-    </BrowserRouter>
-  );
+	return (
+		<ShoppingCartProvider>
+			<BrowserRouter>
+				<AppRoutes />
+				<Navbar />
+			</BrowserRouter>
+		</ShoppingCartProvider>
+	);
 };
 
 export default App;
