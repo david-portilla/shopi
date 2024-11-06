@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "../../Components/Card";
 import Layout from "../../Components/Layout";
+import ProductDetail from "../../Components/ProductDetail";
 
 function Home() {
 	const URL = "https://api.escuelajs.co/api/v1/";
@@ -14,7 +15,7 @@ function Home() {
 				const data = await response.json();
 				setItems(data);
 			} catch (e) {
-				console.error(`Oh no, ocurrió un error: ${e}`);
+				console.error(`Error fetching data: ${e}`);
 			} finally {
 				setLoading(false);
 			}
@@ -24,15 +25,18 @@ function Home() {
 	}, []);
 
 	return (
-		<Layout>
-			<div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
-				{loading ? (
-					<p>Loading...</p>
-				) : (
-					items?.map((item) => <Card key={item.id} data={item} />)
-				)}
-			</div>
-		</Layout>
+		<>
+			<Layout>
+				<div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
+					{loading ? (
+						<p>Loading...</p>
+					) : (
+						items?.map((item) => <Card key={item.id} data={item} />)
+					)}
+				</div>
+				<ProductDetail />
+			</Layout>
+		</>
 	);
 }
 
