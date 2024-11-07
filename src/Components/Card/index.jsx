@@ -12,12 +12,30 @@ const Card = ({ data }) => {
 		category: { name },
 	} = data;
 
-	const { count, setCount, openProductDetail, setProductToShow } =
-		useContext(ShoppingCartContext);
+	const {
+		count,
+		setCount,
+		openProductDetail,
+		setProductToShow,
+		cartProducts,
+		setCartProducts,
+		openCheckoutSideMenu,
+		closeProductDetail,
+		closeCheckoutSideMenu,
+	} = useContext(ShoppingCartContext);
 
 	const handleShowProduct = (product) => {
 		openProductDetail();
+		closeCheckoutSideMenu();
 		setProductToShow(product);
+	};
+
+	const handleAddToCart = (product, e) => {
+		e.stopPropagation();
+		openCheckoutSideMenu();
+		closeProductDetail();
+		setCartProducts([...cartProducts, product]);
+		setCount(count + 1);
 	};
 
 	return (
@@ -37,7 +55,7 @@ const Card = ({ data }) => {
 				/>
 				<div
 					className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
-					onClick={() => setCount(count + 1)}
+					onClick={(e) => handleAddToCart(data, e)}
 				>
 					<button>
 						<PlusIcon className="size-6 text-black" />

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "../../Components/Card";
 import Layout from "../../Components/Layout";
 import ProductDetail from "../../Components/ProductDetail";
+import CheckoutSideMenu from "../../Components/CheckoutSideMenu/index ";
 
 function Home() {
 	const URL = "https://api.escuelajs.co/api/v1/";
@@ -35,6 +36,7 @@ function Home() {
 					)}
 				</div>
 				<ProductDetail />
+				<CheckoutSideMenu />
 			</Layout>
 		</>
 	);

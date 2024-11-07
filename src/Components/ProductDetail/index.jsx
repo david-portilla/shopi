@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline";
-import "./styles.css";
 import { ShoppingCartContext } from "../../Context";
 import cleanImageUrl from "../../Utils";
+import "./styles.css";
 
 const ProductDetail = () => {
 	const { isProductDetailOpen, closeProductDetail, productToShow } =
