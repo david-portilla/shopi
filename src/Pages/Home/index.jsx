@@ -12,7 +12,7 @@ function Home() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await fetch(`${URL}products?offset=0&limit=10`);
+				const response = await fetch(`${URL}products?offset=0&limit=12`);
 				const data = await response.json();
 				setItems(data);
 			} catch (e) {

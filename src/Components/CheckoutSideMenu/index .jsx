@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
+import OrderCard from "../OrderCard";
 import "./styles.css";
 
 const CheckoutSideMenu = () => {
@@ -14,15 +15,16 @@ const CheckoutSideMenu = () => {
 			}`}
 		>
 			<div className="flex justify-between items-center p-6">
-				<h2 className="font-medium text-xl">My cart</h2>
+				<h2 className="font-medium text-xl">My Order</h2>
 				<button onClick={closeCheckoutSideMenu}>
 					<XCircleIcon className="size-6 text-black" />
 				</button>
 			</div>
-			<h3 className="font-bold text-xl">My cart</h3>
-			{Object.keys(cartProducts).map((key) => (
-				<div key={key}>{cartProducts[key].title}</div>
-			))}
+			<div className="flex-1 px-6 overflow-y-scroll">
+				{Object.keys(cartProducts).map((product) => (
+					<OrderCard key={product} data={cartProducts[product]} />
+				))}
+			</div>
 		</aside>
 	);
 };
