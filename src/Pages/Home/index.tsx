@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import Card from "../../Components/Card";
 import Layout from "../../Components/Layout";
 import ProductDetail from "../../Components/ProductDetail";
-import CheckoutSideMenu from "../../Components/CheckoutSideMenu/index ";
+import CheckoutSideMenu from "../../Components/CheckoutSideMenu";
+import { Product } from "../../Context/types";
 
 function Home() {
 	const URL = "https://api.escuelajs.co/api/v1/";
 	const [loading, setLoading] = useState(true);
-	const [items, setItems] = useState(null);
+	const [items, setItems] = useState<Product[] | null>(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -32,7 +33,7 @@ function Home() {
 					{loading ? (
 						<p>Loading...</p>
 					) : (
-						items?.map((item) => <Card key={item.id} data={item} />)
+						items?.map((item: Product) => <Card key={item.id} data={item} />)
 					)}
 				</div>
 				<ProductDetail />

@@ -2,11 +2,12 @@ import { useContext } from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
 import OrderCard from "../OrderCard";
+import { ShoppingCartContextType } from "../../Context/types";
 import "./styles.css";
 
 const CheckoutSideMenu = () => {
-	const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts } =
-		useContext(ShoppingCartContext);
+	const context = useContext(ShoppingCartContext) as ShoppingCartContextType;
+	const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts } = context;
 
 	return (
 		<aside
@@ -21,8 +22,8 @@ const CheckoutSideMenu = () => {
 				</button>
 			</div>
 			<div className="flex-1 px-6 overflow-y-scroll">
-				{Object.keys(cartProducts).map((product) => (
-					<OrderCard key={product} data={cartProducts[product]} />
+				{cartProducts.map((product, index) => (
+					<OrderCard key={index} data={product} />
 				))}
 			</div>
 		</aside>

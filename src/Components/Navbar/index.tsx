@@ -6,7 +6,11 @@ import { ShoppingCartContext } from "../../Context";
 const activeStyle = "underline underline-offset-4";
 
 const Navbar = () => {
-	const { count } = useContext(ShoppingCartContext);
+	const context = useContext(ShoppingCartContext);
+	if (!context) {
+		throw new Error('useShoppingCartContext must be used within a ShoppingCartProvider');
+	}
+	const { count } = context;
 
 	return (
 		<nav className="flex justify-between items-center fixed z-10 top-0 p-4 w-full text-sm font-light">

@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import cleanImageUrl from "../../Utils";
+import { Product } from "../../Context/types";
 
-const OrderCard = ({ data }) => {
+const OrderCard = ({ data }: { data: Product }) => {
 	const { title, price, images } = data;
 	return (
 		<div className="flex justify-between items-center py-2">

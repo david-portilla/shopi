@@ -1,4 +1,4 @@
-const cleanImageUrl = (url) => {
+const cleanImageUrl = (url: string) => {
 	return url?.replace(/[[\]"]/g, "").replace(/&quot;/g, "");
 };
 

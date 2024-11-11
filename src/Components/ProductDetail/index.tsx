@@ -3,10 +3,11 @@ import { XCircleIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
 import cleanImageUrl from "../../Utils";
 import "./styles.css";
+import { ShoppingCartContextType } from "../../Context/types";
 
 const ProductDetail = () => {
-	const { isProductDetailOpen, closeProductDetail, productToShow } =
-		useContext(ShoppingCartContext);
+	const context = useContext(ShoppingCartContext) as ShoppingCartContextType;
+	const { isProductDetailOpen, closeProductDetail, productToShow } = context;
 
 	return (
 		<aside

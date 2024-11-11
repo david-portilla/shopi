@@ -1,16 +1,17 @@
-import PropTypes from "prop-types";
 import { createContext, useState } from "react";
+import { ShoppingCartContextType, Product } from "./types";
 
-export const ShoppingCartContext = createContext({});
+export const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(undefined);
 
-export const ShoppingCartProvider = ({ children }) => {
+
+export const ShoppingCartProvider = ({ children }: { children: React.ReactNode }) => {
 	const [count, setCount] = useState(0);
 	const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
 	const openProductDetail = () => setIsProductDetailOpen(true);
 	const closeProductDetail = () => setIsProductDetailOpen(false);
 
-	const [productToShow, setProductToShow] = useState({});
-	const [cartProducts, setCartProducts] = useState([]);
+	const [productToShow, setProductToShow] = useState<Product>({} as Product);
+	const [cartProducts, setCartProducts] = useState<Product[]>([]);
 
 	const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false);
 	const openCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(true);
@@ -36,8 +37,4 @@ export const ShoppingCartProvider = ({ children }) => {
 			{children}
 		</ShoppingCartContext.Provider>
 	);
-};
-
-ShoppingCartProvider.propTypes = {
-	children: PropTypes.node.isRequired,
 };

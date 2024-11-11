@@ -1,14 +1,14 @@
-import PropTypes from "prop-types";
 import { useContext } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
 import cleanImageUrl from "../../Utils";
+import { Product, ShoppingCartContextType } from "../../Context/types";
 
-const Card = ({ data }) => {
+const Card = ({ data }: { data: Product }) => {
 	const {
 		title,
 		price,
-		images,
+		images	,
 		category: { name },
 	} = data;
 
@@ -22,15 +22,15 @@ const Card = ({ data }) => {
 		openCheckoutSideMenu,
 		closeProductDetail,
 		closeCheckoutSideMenu,
-	} = useContext(ShoppingCartContext);
+	} = useContext(ShoppingCartContext) as ShoppingCartContextType;
 
-	const handleShowProduct = (product) => {
+	const handleShowProduct = (product: Product) => {
 		openProductDetail();
 		closeCheckoutSideMenu();
 		setProductToShow(product);
 	};
 
-	const handleAddToCart = (product, e) => {
+	const handleAddToCart = (product: Product, e: React.MouseEvent<HTMLDivElement>) => {
 		e.stopPropagation();
 		openCheckoutSideMenu();
 		closeProductDetail();
@@ -68,17 +68,6 @@ const Card = ({ data }) => {
 			</p>
 		</div>
 	);
-};
-
-Card.propTypes = {
-	data: PropTypes.shape({
-		title: PropTypes.string.isRequired,
-		price: PropTypes.number.isRequired,
-		images: PropTypes.arrayOf(PropTypes.string),
-		category: PropTypes.shape({
-			name: PropTypes.string,
-		}),
-	}).isRequired,
 };
 
 export default Card;
