@@ -1,0 +1,23 @@
+.card-image img {
+	transition: all 0.3s ease;
+}
+
+.card:hover .card-image img {
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 0;
+	transform: scale(1.01);
+	transition: all 0.3s ease;
+}
+
+.btn-add-to-cart,
+.btn-add-to-cart svg {
+	transition: all 0.3s ease;
+}
+
+.btn-add-to-cart:hover {
+	background-color: #000;
+}
+
+.btn-add-to-cart:hover svg {
+	color: #fff;
+}

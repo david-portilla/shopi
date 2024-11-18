@@ -7,7 +7,8 @@ import "./styles.css";
 
 const CheckoutSideMenu = () => {
 	const context = useContext(ShoppingCartContext) as ShoppingCartContextType;
-	const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts } = context;
+	const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts } =
+		context;
 
 	return (
 		<aside
@@ -22,9 +23,13 @@ const CheckoutSideMenu = () => {
 				</button>
 			</div>
 			<div className="flex-1 px-6 overflow-y-scroll">
-				{cartProducts.map((product, index) => (
-					<OrderCard key={index} data={product} />
-				))}
+				{cartProducts.length === 0 ? (
+					<p>No products in the cart</p>
+				) : (
+					cartProducts.map((product, index) => (
+						<OrderCard key={index} data={product} />
+					))
+				)}
 			</div>
 		</aside>
 	);

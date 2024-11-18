@@ -3,18 +3,17 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
 import cleanImageUrl from "../../Utils";
 import { Product, ShoppingCartContextType } from "../../Context/types";
+import "./styles.css";
 
 const Card = ({ data }: { data: Product }) => {
 	const {
 		title,
 		price,
-		images	,
+		images,
 		category: { name },
 	} = data;
 
 	const {
-		count,
-		setCount,
 		openProductDetail,
 		setProductToShow,
 		cartProducts,
@@ -24,26 +23,43 @@ const Card = ({ data }: { data: Product }) => {
 		closeCheckoutSideMenu,
 	} = useContext(ShoppingCartContext) as ShoppingCartContextType;
 
-	const handleShowProduct = (product: Product) => {
+	const handleShowProductDetail = (product: Product) => {
 		openProductDetail();
 		closeCheckoutSideMenu();
 		setProductToShow(product);
 	};
 
-	const handleAddToCart = (product: Product, e: React.MouseEvent<HTMLDivElement>) => {
+	const handleAddToCart = (
+		product: Product,
+		e: React.MouseEvent<HTMLButtonElement>
+	) => {
 		e.stopPropagation();
 		openCheckoutSideMenu();
 		closeProductDetail();
-		setCartProducts([...cartProducts, product]);
-		setCount(count + 1);
+
+		const checkProductInCart = cartProducts.find(
+			(item) => item.id === product.id
+		);
+
+		if (checkProductInCart) {
+			setCartProducts(
+				cartProducts.map((item) =>
+					item.id === product.id
+						? { ...item, quantity: (item.quantity += 1) }
+						: item
+				)
+			);
+		} else {
+			setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
+		}
 	};
 
 	return (
 		<div
-			className="bg-white cursor-pointer w-56 h-60 rounded-lg"
-			onClick={() => handleShowProduct(data)}
+			className="card bg-white cursor-pointer w-56 h-60 rounded-lg"
+			onClick={() => handleShowProductDetail(data)}
 		>
-			<figure className="relative mb-2 w-full h-4/5">
+			<figure className="card-image relative mb-2 w-full h-4/5">
 				<span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">
 					{name}
 				</span>
@@ -53,14 +69,12 @@ const Card = ({ data }: { data: Product }) => {
 					alt={title}
 					referrerPolicy="no-referrer"
 				/>
-				<div
-					className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
+				<button
+					className="btn-add-to-cart absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
 					onClick={(e) => handleAddToCart(data, e)}
 				>
-					<button>
-						<PlusIcon className="size-6 text-black" />
-					</button>
-				</div>
+					<PlusIcon className="size-6 text-black" />
+				</button>
 			</figure>
 			<p className="flex justify-between">
 				<span className="text-sm font-light">{title}</span>

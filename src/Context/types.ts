@@ -1,6 +1,8 @@
 export interface ShoppingCartContextType {
-	count: number;
-	setCount: (count: number) => void;
+	productsCount: number;
+	setProductsCount: (count: number) => void;
+	itemsCount: number;
+	setItemsCount: (count: number) => void;
 	isProductDetailOpen: boolean;
 	openProductDetail: () => void;
 	closeProductDetail: () => void;
@@ -20,4 +22,5 @@ export interface Product {
 	images: string[];
 	category: { name: string };
 	description: string;
+	quantity: number;
 }

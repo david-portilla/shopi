@@ -1,11 +1,17 @@
 import { createContext, useState } from "react";
 import { ShoppingCartContextType, Product } from "./types";
 
-export const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(undefined);
+export const ShoppingCartContext = createContext<
+	ShoppingCartContextType | undefined
+>(undefined);
 
-
-export const ShoppingCartProvider = ({ children }: { children: React.ReactNode }) => {
-	const [count, setCount] = useState(0);
+export const ShoppingCartProvider = ({
+	children,
+}: {
+	children: React.ReactNode;
+}) => {
+	const [productsCount, setProductsCount] = useState(0);
+	const [itemsCount, setItemsCount] = useState(0);
 	const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
 	const openProductDetail = () => setIsProductDetailOpen(true);
 	const closeProductDetail = () => setIsProductDetailOpen(false);
@@ -20,8 +26,10 @@ export const ShoppingCartProvider = ({ children }: { children: React.ReactNode }
 	return (
 		<ShoppingCartContext.Provider
 			value={{
-				count,
-				setCount,
+				productsCount,
+				setProductsCount,
+				itemsCount,
+				setItemsCount,
 				isProductDetailOpen,
 				openProductDetail,
 				closeProductDetail,
