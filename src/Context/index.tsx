@@ -10,8 +10,6 @@ export const ShoppingCartProvider = ({
 }: {
 	children: React.ReactNode;
 }) => {
-	const [productsCount, setProductsCount] = useState(0);
-	const [itemsCount, setItemsCount] = useState(0);
 	const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
 	const openProductDetail = () => setIsProductDetailOpen(true);
 	const closeProductDetail = () => setIsProductDetailOpen(false);
@@ -26,10 +24,6 @@ export const ShoppingCartProvider = ({
 	return (
 		<ShoppingCartContext.Provider
 			value={{
-				productsCount,
-				setProductsCount,
-				itemsCount,
-				setItemsCount,
 				isProductDetailOpen,
 				openProductDetail,
 				closeProductDetail,

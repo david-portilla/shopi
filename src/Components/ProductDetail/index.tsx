@@ -11,7 +11,7 @@ const ProductDetail = () => {
 
 	return (
 		<aside
-			className={`product-detail flex flex-col fixed right-0 border border-black rounded-lg bg-white ${
+			className={`product-detail flex flex-col fixed right-0 bg-gray-100 ${
 				isProductDetailOpen ? "translate-x-0" : "translate-x-full"
 			}`}
 		>

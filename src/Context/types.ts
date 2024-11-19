@@ -1,8 +1,4 @@
 export interface ShoppingCartContextType {
-	productsCount: number;
-	setProductsCount: (count: number) => void;
-	itemsCount: number;
-	setItemsCount: (count: number) => void;
 	isProductDetailOpen: boolean;
 	openProductDetail: () => void;
 	closeProductDetail: () => void;

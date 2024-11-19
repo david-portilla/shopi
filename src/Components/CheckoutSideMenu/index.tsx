@@ -10,9 +10,14 @@ const CheckoutSideMenu = () => {
 	const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts } =
 		context;
 
+	const totalPrice = cartProducts.reduce(
+		(acc, product) => acc + product.price * product.quantity,
+		0
+	);
+
 	return (
 		<aside
-			className={`checkout-side-menu flex flex-col fixed right-0 border border-black rounded-lg bg-white ${
+			className={`checkout-side-menu flex flex-col fixed right-0 bg-gray-100 ${
 				isCheckoutSideMenuOpen ? "translate-x-0" : "translate-x-full"
 			}`}
 		>
@@ -22,7 +27,7 @@ const CheckoutSideMenu = () => {
 					<XCircleIcon className="size-6 text-black" />
 				</button>
 			</div>
-			<div className="flex-1 px-6 overflow-y-scroll">
+			<div className="flex-1 px-6 overflow-y-auto">
 				{cartProducts.length === 0 ? (
 					<p>No products in the cart</p>
 				) : (
@@ -30,6 +35,10 @@ const CheckoutSideMenu = () => {
 						<OrderCard key={index} data={product} />
 					))
 				)}
+			</div>
+			<div className="flex justify-between items-center p-6">
+				<p className="font-light text-lg">Total:</p>
+				<span className="font-medium text-2xl">$ {totalPrice}</span>
 			</div>
 		</aside>
 	);
