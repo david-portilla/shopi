@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
 import OrderCard from "../OrderCard";
@@ -7,13 +8,37 @@ import "./styles.css";
 
 const CheckoutSideMenu = () => {
 	const context = useContext(ShoppingCartContext) as ShoppingCartContextType;
-	const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts } =
-		context;
+	const {
+		isCheckoutSideMenuOpen,
+		closeCheckoutSideMenu,
+		cartProducts,
+		order,
+		setOrder,
+		setCartProducts,
+	} = context;
 
 	const totalPrice = cartProducts.reduce(
 		(acc, product) => acc + product.price * product.quantity,
 		0
 	);
+
+	const handleCheckout = () => {
+		console.log("checkout:", cartProducts);
+		const orderToAdd = {
+			orderId: uuidv4(),
+			date: new Date().toLocaleDateString(),
+			totalPrice,
+			products: cartProducts,
+		};
+		setOrder([...order, orderToAdd]);
+		closeCheckoutSideMenu();
+		setCartProducts([]);
+	};
+
+	useEffect(() => {
+		console.log("cartProducts:", cartProducts);
+		console.log("order:", order);
+	}, [order, cartProducts]);
 
 	return (
 		<aside
@@ -36,9 +61,17 @@ const CheckoutSideMenu = () => {
 					))
 				)}
 			</div>
-			<div className="flex justify-between items-center p-6">
-				<p className="font-light text-lg">Total:</p>
-				<span className="font-medium text-2xl">$ {totalPrice}</span>
+			<div className="p-6">
+				<div className="flex justify-between items-center mb-6">
+					<p className="font-light text-lg">Total:</p>
+					<span className="font-medium text-2xl">$ {totalPrice}</span>
+				</div>
+				<button
+					onClick={handleCheckout}
+					className="bg-black text-white w-full rounded-lg py-3"
+				>
+					Checkout
+				</button>
 			</div>
 		</aside>
 	);

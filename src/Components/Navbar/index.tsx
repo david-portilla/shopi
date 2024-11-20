@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
 import { ShoppingCartContextType } from "../../Context/types";
@@ -8,11 +8,16 @@ const activeStyle = "underline underline-offset-4";
 
 const Navbar = () => {
 	const context = useContext(ShoppingCartContext) as ShoppingCartContextType;
-	const { cartProducts, openCheckoutSideMenu } = context;
+	const {
+		cartProducts,
+		isCheckoutSideMenuOpen,
+		openCheckoutSideMenu,
+		closeCheckoutSideMenu,
+	} = context;
 
-	useEffect(() => {
-		console.log(cartProducts);
-	}, [cartProducts]);
+	const toggleCheckoutSideMenu = () => {
+		isCheckoutSideMenuOpen ? closeCheckoutSideMenu() : openCheckoutSideMenu();
+	};
 
 	return (
 		<nav className="flex justify-between items-center fixed z-10 top-0 p-4 w-full text-sm font-light">
@@ -97,7 +102,7 @@ const Navbar = () => {
 				</li>
 				<li className="flex items-center justify-center gap-2">
 					<ShoppingBagIcon
-						onClick={openCheckoutSideMenu}
+						onClick={toggleCheckoutSideMenu}
 						className="size-6 text-black cursor-pointer"
 					/>
 					{cartProducts.length}

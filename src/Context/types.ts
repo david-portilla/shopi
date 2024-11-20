@@ -9,6 +9,8 @@ export interface ShoppingCartContextType {
 	isCheckoutSideMenuOpen: boolean;
 	openCheckoutSideMenu: () => void;
 	closeCheckoutSideMenu: () => void;
+	order: Order[];
+	setOrder: (order: Order[]) => void;
 }
 
 export interface Product {
@@ -19,4 +21,10 @@ export interface Product {
 	category: { name: string };
 	description: string;
 	quantity: number;
+}
+
+export interface Order {
+	orderId: string;
+	totalPrice: number;
+	products: Product[];
 }

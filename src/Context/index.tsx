@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { ShoppingCartContextType, Product } from "./types";
+import { ShoppingCartContextType, Product, Order } from "./types";
 
 export const ShoppingCartContext = createContext<
 	ShoppingCartContextType | undefined
@@ -21,6 +21,8 @@ export const ShoppingCartProvider = ({
 	const openCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(true);
 	const closeCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(false);
 
+	const [order, setOrder] = useState<Order[]>([]);
+
 	return (
 		<ShoppingCartContext.Provider
 			value={{
@@ -34,6 +36,8 @@ export const ShoppingCartProvider = ({
 				isCheckoutSideMenuOpen,
 				openCheckoutSideMenu,
 				closeCheckoutSideMenu,
+				order,
+				setOrder,
 			}}
 		>
 			{children}
