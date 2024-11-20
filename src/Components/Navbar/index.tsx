@@ -20,7 +20,7 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav className="flex justify-between items-center fixed z-10 top-0 p-4 w-full text-sm font-light">
+		<nav className="flex bg-white justify-between items-center fixed z-10 top-0 p-4 w-full text-sm font-light">
 			<ul className="flex items-center gap-3">
 				<li className="font-bold text-2xl">
 					<NavLink to="/">Shopi</NavLink>

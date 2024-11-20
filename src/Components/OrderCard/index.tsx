@@ -1,10 +1,17 @@
 import { useContext } from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
-import { Product, ShoppingCartContextType } from "../../Context/types";
 import { ShoppingCartContext } from "../../Context";
+import { Order, Product, ShoppingCartContextType } from "../../Context/types";
 import cleanImageUrl from "../../Utils";
+import "./index.css";
 
-const OrderCard = ({ data }: { data: Product }) => {
+const OrderCard = ({
+	data,
+	orderId = undefined,
+}: {
+	data: Product;
+	orderId?: Order;
+}) => {
 	const { id, title, price, images, quantity } = data;
 	const context = useContext(ShoppingCartContext) as ShoppingCartContextType;
 	const { cartProducts, setCartProducts } = context;
@@ -36,7 +43,8 @@ const OrderCard = ({ data }: { data: Product }) => {
 	return (
 		<div className="flex justify-between items-center py-2">
 			<div className="flex items-center gap-2">
-				<figure className="w-20 h-20">
+				<figure className="w-20 h-20 relative">
+					{orderId && <p className="order-card-quantity">{quantity}</p>}
 					<img
 						className="w-full h-full rounded-lg object-contain"
 						src={cleanImageUrl(images?.[0])}
@@ -47,13 +55,17 @@ const OrderCard = ({ data }: { data: Product }) => {
 			</div>
 			<div className="flex items-center gap-2">
 				<p className="text-lg font-medium">${price * quantity}</p>
-				<button onClick={handleAddProduct}>
-					<PlusIcon className="size-6 text-black" />
-				</button>
-				<p className="text-lg font-medium">[{quantity}]</p>
-				<button onClick={handleDeleteProduct}>
-					<MinusIcon className="size-6 text-black" />
-				</button>
+				{!orderId && (
+					<>
+						<button onClick={handleAddProduct}>
+							<PlusIcon className="size-6 text-black" />
+						</button>
+						<p className="text-lg font-medium">[{quantity}]</p>
+						<button onClick={handleDeleteProduct}>
+							<MinusIcon className="size-6 text-black" />
+						</button>
+					</>
+				)}
 			</div>
 		</div>
 	);

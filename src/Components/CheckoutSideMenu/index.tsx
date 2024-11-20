@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
@@ -12,8 +13,8 @@ const CheckoutSideMenu = () => {
 		isCheckoutSideMenuOpen,
 		closeCheckoutSideMenu,
 		cartProducts,
-		order,
-		setOrder,
+		orders,
+		setOrders,
 		setCartProducts,
 	} = context;
 
@@ -23,22 +24,16 @@ const CheckoutSideMenu = () => {
 	);
 
 	const handleCheckout = () => {
-		console.log("checkout:", cartProducts);
 		const orderToAdd = {
 			orderId: uuidv4(),
 			date: new Date().toLocaleDateString(),
 			totalPrice,
 			products: cartProducts,
 		};
-		setOrder([...order, orderToAdd]);
+		setOrders([...orders, orderToAdd]);
 		closeCheckoutSideMenu();
 		setCartProducts([]);
 	};
-
-	useEffect(() => {
-		console.log("cartProducts:", cartProducts);
-		console.log("order:", order);
-	}, [order, cartProducts]);
 
 	return (
 		<aside
@@ -47,7 +42,7 @@ const CheckoutSideMenu = () => {
 			}`}
 		>
 			<div className="flex justify-between items-center p-6">
-				<h2 className="font-medium text-xl">My Order</h2>
+				<h2 className="font-medium text-xl">My Cart</h2>
 				<button onClick={closeCheckoutSideMenu}>
 					<XCircleIcon className="size-6 text-black" />
 				</button>
@@ -66,12 +61,16 @@ const CheckoutSideMenu = () => {
 					<p className="font-light text-lg">Total:</p>
 					<span className="font-medium text-2xl">$ {totalPrice}</span>
 				</div>
-				<button
-					onClick={handleCheckout}
-					className="bg-black text-white w-full rounded-lg py-3"
-				>
-					Checkout
-				</button>
+				{cartProducts.length > 0 && (
+					<Link to={"/my-orders/last"}>
+						<button
+							onClick={handleCheckout}
+							className="bg-black text-white w-full rounded-lg py-3"
+						>
+							Checkout
+						</button>
+					</Link>
+				)}
 			</div>
 		</aside>
 	);
