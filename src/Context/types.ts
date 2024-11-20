@@ -10,7 +10,7 @@ export interface ShoppingCartContextType {
 	openCheckoutSideMenu: () => void;
 	closeCheckoutSideMenu: () => void;
 	orders: Order[];
-	setOrders: (orders: Order[]) => void;
+	setOrders: (order: Order[]) => void;
 }
 
 export interface Product {

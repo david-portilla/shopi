@@ -1,16 +1,16 @@
 import { useContext } from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
-import { Order, Product, ShoppingCartContextType } from "../../Context/types";
+import { Product, ShoppingCartContextType } from "../../Context/types";
 import cleanImageUrl from "../../Utils";
 import "./index.css";
 
 const OrderCard = ({
 	data,
-	orderId = undefined,
+	orderId,
 }: {
 	data: Product;
-	orderId?: Order;
+	orderId: string | undefined;
 }) => {
 	const { id, title, price, images, quantity } = data;
 	const context = useContext(ShoppingCartContext) as ShoppingCartContextType;
