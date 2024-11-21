@@ -5,12 +5,12 @@ import { Product, ShoppingCartContextType } from "../../Context/types";
 import cleanImageUrl from "../../Utils";
 import "./index.css";
 
-const OrderCard = ({
+const OrderItem = ({
 	data,
 	orderId,
 }: {
 	data: Product;
-	orderId: string | undefined;
+	orderId?: string | undefined;
 }) => {
 	const { id, title, price, images, quantity } = data;
 	const context = useContext(ShoppingCartContext) as ShoppingCartContextType;
@@ -44,7 +44,7 @@ const OrderCard = ({
 		<div className="flex justify-between items-center py-2">
 			<div className="flex items-center gap-2">
 				<figure className="w-20 h-20 relative">
-					{orderId && <p className="order-card-quantity">{quantity}</p>}
+					{orderId && <p className="order-item-quantity">{quantity}</p>}
 					<img
 						className="w-full h-full rounded-lg object-contain"
 						src={cleanImageUrl(images?.[0])}
@@ -71,4 +71,4 @@ const OrderCard = ({
 	);
 };
 
-export default OrderCard;
+export default OrderItem;

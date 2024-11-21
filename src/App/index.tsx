@@ -3,7 +3,7 @@ import { ShoppingCartProvider } from "../Context";
 import Home from "../Pages/Home";
 import MyAccount from "../Pages/MyAccount";
 import MyOrder from "../Pages/MyOrder";
-import MyOrdersList from "../Pages/MyOrdersList";
+import MyOrders from "../Pages/MyOrders";
 import NotFound from "../Pages/NotFound";
 import Navbar from "../Components/Navbar";
 import "./App.css";
@@ -24,7 +24,7 @@ const AppRoutes = () => {
 		},
 		{
 			path: "/my-orders",
-			element: <MyOrdersList />,
+			element: <MyOrders />,
 		},
 		{
 			path: "/my-orders/last",

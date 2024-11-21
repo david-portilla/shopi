@@ -2,34 +2,38 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 import { ShoppingCartContextType } from "../../Context/types";
 import Layout from "../../Components/Layout";
-import OrderCard from "../../Components/OrderItem";
+import OrderItem from "../../Components/OrderItem";
 import { Link } from "react-router-dom";
 
 const MyOrders = () => {
 	const context = useContext(ShoppingCartContext) as ShoppingCartContextType;
 	const { orders } = context;
+	const ordersSorted = orders.sort(
+		(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+	);
 	return (
 		<Layout>
 			<h1 className="text-2xl font-bold mb-6">My Orders</h1>
-			{orders.length > 0 ? (
+			{ordersSorted.length > 0 ? (
 				<ul className="flex flex-col overflow-auto">
-					{orders.map((order) => (
+					{ordersSorted.map((order) => (
 						<Link
 							to={`/my-orders/${order.orderId}`}
 							key={order.orderId}
 							className="text-sm font-light mb-4"
 						>
 							<li className="flex flex-col mb-6">
-								<h2 className="text-md font-bold">Order #{order.orderId}</h2>
-								<p className="text-sm font-light mb-4">{order.date}</p>
+								<h2 className="text-md font-bold mb-4">
+									Order #{order.orderId}
+								</h2>
 								{order.products.map((item) => (
-									<OrderCard
+									<OrderItem
 										key={item.id}
 										data={item}
 										orderId={order.orderId}
 									/>
 								))}
-								<p className="text-lg font-medium">
+								<p className="text-lg font-bold text-center">
 									Total: ${order.totalPrice}
 								</p>
 							</li>

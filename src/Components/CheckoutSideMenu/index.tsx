@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
-import OrderCard from "../OrderCard";
+import OrderItem from "../OrderItem";
 import { ShoppingCartContextType } from "../../Context/types";
 import "./styles.css";
 
@@ -26,7 +26,7 @@ const CheckoutSideMenu = () => {
 	const handleCheckout = () => {
 		const orderToAdd = {
 			orderId: uuidv4(),
-			date: new Date().toLocaleDateString(),
+			date: new Date().toLocaleString(),
 			totalPrice,
 			products: cartProducts,
 		};
@@ -52,7 +52,7 @@ const CheckoutSideMenu = () => {
 					<p>No products in the cart</p>
 				) : (
 					cartProducts.map((product, index) => (
-						<OrderCard key={index} data={product} />
+						<OrderItem key={index} data={product} />
 					))
 				)}
 			</div>
