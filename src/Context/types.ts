@@ -11,6 +11,15 @@ export interface ShoppingCartContextType {
 	closeCheckoutSideMenu: () => void;
 	orders: Order[];
 	setOrders: (order: Order[]) => void;
+	items: Product[] | null;
+	setItems: (items: Product[] | null) => void;
+	loading: boolean;
+	searchByTitle: string;
+	setSearchByTitle: (title: string) => void;
+	filteredItems: Product[] | null;
+	setFilteredItems: (items: Product[] | null) => void;
+	searchByCategory: string;
+	setSearchByCategory: (category: string) => void;
 }
 
 export interface Product {
