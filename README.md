@@ -1,3 +1,14 @@
+<div align="center">
+  <h1> Shopi Store </h1>
+  <br><br>
+  <img src=".github/shopi.png">
+  <br>
+  <br>
+  <p> Final result </p>
+    <p><strong><a href="https://shopi-store.vercel.app/" target="_blank" rel="noopener noreferrer">https://shopi-store.vercel.app/</a></strong></p>
+  <br>
+</div>
+
 # Shopi
 
 Shopi is an e-commerce application developed with modern technologies to provide a fast and efficient user experience. This project uses a combination of frontend tools to create an attractive and functional interface.

@@ -23,7 +23,6 @@ const Navbar = () => {
 			const uniqueCategories = Array.from(
 				new Set(items.map((item: Product) => item.category.name))
 			);
-			console.log("uniqueCategories:", uniqueCategories);
 			setCategories(uniqueCategories);
 		}
 	}, [items]);
@@ -65,7 +64,17 @@ const Navbar = () => {
 				))}
 			</ul>
 			<ul className="flex items-center gap-3">
-				<li className="text-black/60">david_portilla@hotmail.com</li>
+				<li>
+					<span className="text-black/60">by: </span>
+					<a
+						href="https://davidportilla.com/"
+						target="_blank"
+						className="text-black font-bold"
+						rel="noopener noreferrer"
+					>
+						David Portilla
+					</a>
+				</li>
 				<li>
 					<NavLink
 						to="/my-orders"
