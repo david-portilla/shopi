@@ -1,20 +1,32 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
-import { ShoppingCartContextType } from "../../Context/types";
+import { ShoppingCartContextType, Product } from "../../Context/types";
 
 const activeStyle = "underline underline-offset-4";
 
 const Navbar = () => {
 	const context = useContext(ShoppingCartContext) as ShoppingCartContextType;
 	const {
+		items,
 		cartProducts,
 		isCheckoutSideMenuOpen,
 		openCheckoutSideMenu,
 		closeCheckoutSideMenu,
 		setSearchByCategory,
 	} = context;
+	const [categories, setCategories] = useState<string[]>([]);
+
+	useEffect(() => {
+		if (items) {
+			const uniqueCategories = Array.from(
+				new Set(items.map((item: Product) => item.category.name))
+			);
+			console.log("uniqueCategories:", uniqueCategories);
+			setCategories(uniqueCategories);
+		}
+	}, [items]);
 
 	const toggleCheckoutSideMenu = () => {
 		isCheckoutSideMenuOpen ? closeCheckoutSideMenu() : openCheckoutSideMenu();
@@ -37,51 +49,20 @@ const Navbar = () => {
 						All
 					</NavLink>
 				</li>
-				<li>
-					<NavLink
-						to="/clothes"
-						onClick={() => setSearchByCategory("clothes")}
-						className={({ isActive }) => (isActive ? activeStyle : undefined)}
-					>
-						Clothes
-					</NavLink>
-				</li>
-				<li>
-					<NavLink
-						to="/electronics"
-						onClick={() => setSearchByCategory("electronics")}
-						className={({ isActive }) => (isActive ? activeStyle : undefined)}
-					>
-						Electronics
-					</NavLink>
-				</li>
-				<li>
-					<NavLink
-						to="/furnitures"
-						onClick={() => setSearchByCategory("furnitures")}
-						className={({ isActive }) => (isActive ? activeStyle : undefined)}
-					>
-						Furnitures
-					</NavLink>
-				</li>
-				<li>
-					<NavLink
-						to="/toys"
-						onClick={() => setSearchByCategory("toys")}
-						className={({ isActive }) => (isActive ? activeStyle : undefined)}
-					>
-						Toys
-					</NavLink>
-				</li>
-				<li>
-					<NavLink
-						to="/others"
-						onClick={() => setSearchByCategory("others")}
-						className={({ isActive }) => (isActive ? activeStyle : undefined)}
-					>
-						Others
-					</NavLink>
-				</li>
+
+				{categories.map((category) => (
+					<li key={category}>
+						<NavLink
+							to={`/${category.toLowerCase()}`}
+							onClick={() => setSearchByCategory(category)}
+							className={({ isActive }) =>
+								`capitalize ${isActive ? activeStyle : ""}`
+							}
+						>
+							{category}
+						</NavLink>
+					</li>
+				))}
 			</ul>
 			<ul className="flex items-center gap-3">
 				<li className="text-black/60">david_portilla@hotmail.com</li>
@@ -99,14 +80,6 @@ const Navbar = () => {
 						className={({ isActive }) => (isActive ? activeStyle : undefined)}
 					>
 						My account
-					</NavLink>
-				</li>
-				<li>
-					<NavLink
-						to="/sign-in"
-						className={({ isActive }) => (isActive ? activeStyle : undefined)}
-					>
-						Sign In
 					</NavLink>
 				</li>
 				<li className="flex items-center justify-center gap-2">

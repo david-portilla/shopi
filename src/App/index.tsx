@@ -1,5 +1,5 @@
 import { BrowserRouter, useRoutes } from "react-router-dom";
-import { ShoppingCartProvider } from "../Context";
+import { ShoppingCartContext, ShoppingCartProvider } from "../Context";
 import Home from "../Pages/Home";
 import MyAccount from "../Pages/MyAccount";
 import MyOrder from "../Pages/MyOrder";
@@ -7,33 +7,27 @@ import MyOrders from "../Pages/MyOrders";
 import NotFound from "../Pages/NotFound";
 import Navbar from "../Components/Navbar";
 import "./App.css";
+import { ShoppingCartContextType } from "../Context/types";
+import { useContext } from "react";
 
 const AppRoutes = () => {
+	const context = useContext(ShoppingCartContext) as ShoppingCartContextType;
+	const { items } = context;
+
+	const categories = items
+		? Array.from(new Set(items.map((item) => item.category.name)))
+		: [];
+
+	const categoryRoutes = categories.map((category) => ({
+		path: `/${category.toLowerCase().replace(/\s+/g, "-")}`,
+		element: <Home />,
+	}));
 	let routes = useRoutes([
 		{
 			path: "/",
 			element: <Home />,
 		},
-		{
-			path: "/clothes",
-			element: <Home />,
-		},
-		{
-			path: "/electronics",
-			element: <Home />,
-		},
-		{
-			path: "/furnitures",
-			element: <Home />,
-		},
-		{
-			path: "/toys",
-			element: <Home />,
-		},
-		{
-			path: "/others",
-			element: <Home />,
-		},
+		...categoryRoutes,
 		{
 			path: "/my-order",
 			element: <MyOrder />,
